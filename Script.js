@@ -77,27 +77,46 @@ function validaNav() {
 }
 
 function criaNav() {
-    cena1.adicionar(new Sprite({
+    /*cena1.adicionar(new Sprite({
         origemX: 31,
         x: (Math.floor(Math.random() * 8)) * 50,
         y: -60,
         w: 50,
         h: 50,
-        
+
         va: 4 * Math.random(),
         vm: 200 * Math.random(),
         vy: 500,
         comportar: persegue2(pc),
         props: { tipo: "npc" }
     }));
+*/
 
-        var tiroInimigo = new Sprite({
-            origemX: 136, origemY: 12, x: this.x+ 25, y:  100, a: this.a - 0.1 + 0 * Math.random(),
-            w: 8, h: 13, comportar: vtiro(), props: { tipo: "npc" }, vy: +100, vx: 0
+    var inimigo = new Sprite({
+        origemX: 31,
+        x: (Math.floor(Math.random() * 8)) * 50,
+        y: -60,
+        w: 50,
+        h: 50,
+
+        va: 4 * Math.random(),
+        vm: 200 * Math.random(),
+        vy: 500,
+        comportar: persegue2(pc),
+        props: { tipo: "npc" }
+    })
+    cena1.adicionar(inimigo);
+
+    /** 
+        var tiro = new Sprite({
+            origemX: 136, origemY: 12, x: this.x + 11, y: this.y, a: this.a - 0.1 + 0 * Math.random(),
+            w: 8, h: 13, comportar: vtiro(), props: { tipo: "tiro" }, vy: -1000, vx: 0
         });
-        cena1.adicionar(tiroInimigo);
-        this.cooldown = 0.4;
-    
+        this.Scene.adicionar(tiro);
+        this.cooldown = 0.1;
+        this.Scene.tiroSom();
+    */
+
 }
 
 
@@ -119,6 +138,17 @@ function persegue2(alvo) {
 
         this.va = 30 * (prod - 0);
         this.vy = 30;
+
+        if (this.cooldown <= 0) {
+            var tiroInimigo = new Sprite({
+                origemX: 136, origemY: 12, x: this.x + 20, y: this.y + 32, a: this.a - 0.1 + 0 * Math.random(),
+                w: 8, h: 13, comportar: vtiro(), props: { tipo: "npc" }, vy: +100, vx: 0
+            });
+            this.Scene.adicionar(tiroInimigo);
+            this.cooldown = 0.9;
+            // this.Scene.tiroSom();
+        }
+
     }
 }
 
