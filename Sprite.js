@@ -17,7 +17,6 @@ function Sprite(params = {}) {
         imune: 0,
         atirando: 0,
         image: "",
-        imge: "imagens/img.png",
         scene: undefined,
         comportar: undefined,
         limite: undefined,
@@ -47,9 +46,9 @@ Sprite.prototype.desenhar = function (ctx) {
 
     ctx.drawImage(img, this.origemX, this.origemY, this.w, this.h,
         Math.floor(this.x), Math.floor(this.y), this.w, this.h);
-
-
 };
+
+
 
 Sprite.prototype.explodir = function () {
     this.origemX = 80;

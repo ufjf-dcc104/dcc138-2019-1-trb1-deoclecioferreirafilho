@@ -52,8 +52,10 @@ Scene.prototype.adicionarImg = function (image) {
 
 
 Scene.prototype.desenhar = function () {
-    for (var i = 0; i < this.sprites.length; i++)
+    for (var i = 0; i < this.sprites.length; i++){
         this.sprites[i].desenhar(this.ctx);
+      
+    }
 }
 
 Scene.prototype.atualizar = function () {

@@ -26,14 +26,13 @@ var mensagem = function (y, text, color) {
 
 var mensages = [];
 
-
-
 var cena1 = new Scene({ ctx: ctx, w: canvas.width, h: canvas.height });
 var pc = new Sprite({ x: canvas.width / 2 - 15, y: canvas.height - 55, comportar: porTeclasDirecionais(teclas), props: { tipo: "pc" } }); //
 var fundo = new Sprite({ origemX: 0, origemY: 56, w: canvas.width, h: canvas.height, x: 0, y: 0 })
 cena1.carregaImagem(img);
 cena1.adicionar(fundo);
 cena1.adicionar(pc);
+
 
 var mensageInicio = new mensagem(cena1.h / 2, "ENTER INICIAR", "red");
 var mensagePausa = new mensagem(cena1.h / 2, "PAUSA", "red");
@@ -49,8 +48,6 @@ cena1.adicionar(new Sprite({
     origemX: 31, origemY: 0, x: 150, y: -50, w: 50, h: 50, va: 30, vm: 100,
     comportar: persegue2(pc), props: { tipo: "npc", Spawn: 10 }
 }));
-
-
 
 
 var navFreq = 100;
@@ -77,46 +74,18 @@ function validaNav() {
 }
 
 function criaNav() {
-    /*cena1.adicionar(new Sprite({
+    cena1.adicionar(new Sprite({
         origemX: 31,
         x: (Math.floor(Math.random() * 8)) * 50,
         y: -60,
         w: 50,
         h: 50,
-
         va: 4 * Math.random(),
         vm: 200 * Math.random(),
         vy: 500,
         comportar: persegue2(pc),
         props: { tipo: "npc" }
     }));
-*/
-
-    var inimigo = new Sprite({
-        origemX: 31,
-        x: (Math.floor(Math.random() * 8)) * 50,
-        y: -60,
-        w: 50,
-        h: 50,
-
-        va: 4 * Math.random(),
-        vm: 200 * Math.random(),
-        vy: 500,
-        comportar: persegue2(pc),
-        props: { tipo: "npc" }
-    })
-    cena1.adicionar(inimigo);
-
-    /** 
-        var tiro = new Sprite({
-            origemX: 136, origemY: 12, x: this.x + 11, y: this.y, a: this.a - 0.1 + 0 * Math.random(),
-            w: 8, h: 13, comportar: vtiro(), props: { tipo: "tiro" }, vy: -1000, vx: 0
-        });
-        this.Scene.adicionar(tiro);
-        this.cooldown = 0.1;
-        this.Scene.tiroSom();
-    */
-
 }
 
 
@@ -141,7 +110,7 @@ function persegue2(alvo) {
 
         if (this.cooldown <= 0) {
             var tiroInimigo = new Sprite({
-                origemX: 136, origemY: 12, x: this.x + 20, y: this.y + 32, a: this.a - 0.1 + 0 * Math.random(),
+                origemX: 136, origemY: 12, x: this.x + 20, y: this.y + 32, a: this.a - 0.1 + 0 * Math.random(), img: "imagens/tiroi.png",
                 w: 8, h: 13, comportar: vtiro(), props: { tipo: "npc" }, vy: +100, vx: 0
             });
             this.Scene.adicionar(tiroInimigo);
@@ -196,7 +165,9 @@ function porTeclasDirecionais(teclas) {
         if (teclas.espaco && this.cooldown <= 0) {
             var tiro = new Sprite({
                 origemX: 136, origemY: 12, x: this.x + 11, y: this.y, a: this.a - 0.1 + 0 * Math.random(),
-                w: 8, h: 13, comportar: vtiro(), props: { tipo: "tiro" }, vy: -1000, vx: 0
+                w: 8, h: 13, comportar: vtiro(), props: { tipo: "tiro" }, vy: -1000, vx: 0, 
+                rotate: (this.a + Math.PI / 2)
+
             });
             this.Scene.adicionar(tiro);
             this.cooldown = 0.1;
@@ -211,7 +182,6 @@ function vtiro() {
 
     this.y = this.y + this.vy * dt;
 }
-
 
 
 
