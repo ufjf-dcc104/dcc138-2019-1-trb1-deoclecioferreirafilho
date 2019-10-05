@@ -70,8 +70,7 @@ Scene.prototype.atualizar = function () {
             this.ctx.fillText(mensagens.text, mensagens.x, mensagens.y);
 
         }
-    }
-   
+    }   
 }
 
 Scene.prototype.atualizaPlacar = function(){
